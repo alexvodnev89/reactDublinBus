@@ -1,0 +1,46 @@
+body {
+  background-color: #404040;
+  padding: 0 10% 0 10%;
+  min-height: 100%;
+}
+.myHeader {
+  background-color: #bfbfbf;
+  text-align: left;
+  padding: 3em 1em 3em 1em;
+}
+main {
+  height: auto;
+  min-height: 20em;
+  border:1px solid white;
+  padding: 3em 1em 3em 1em;
+}
+footer {
+  background-color: #bfbfbf;
+  padding: 3em 1em 3em 1em;
+}
+.active {
+  color: #ff6600;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li {
+    float: left;
+    padding: 5px 0;
+}
+li a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: black;
+    padding: 5px 10px;
+    color: white;
+}
+a:hover {
+  background-color: #e6e6e6;
+  color: black;
+}
