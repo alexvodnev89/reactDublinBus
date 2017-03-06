@@ -13,7 +13,7 @@ export const Header = (props) => {
               <ul className="nav navbar-nav">
                 <li><Link to={"/home"} activeClassName={"active"}>Home</Link></li>
                 <li><Link to={"/user"} activeClassName={"active"}>User</Link></li>
-                <li><Link to={"/user"} activeClassName={"active"}>Real Time Info</Link></li>
+                <li><Link to={"/realtime"} activeClassName={"active"}>Real Time Info</Link></li>
               </ul>
             </div>
           </div>
