@@ -6,13 +6,12 @@ body {
 .myHeader {
   background-color: #bfbfbf;
   text-align: left;
-  padding: 3em 1em 3em 1em;
+  padding: 1em 1em 3em 1em;
 }
 main {
   height: auto;
-  min-height: 20em;
   border:1px solid white;
-  padding: 3em 1em 3em 1em;
+  padding: 0em 1em 3em 1em;
 }
 footer {
   background-color: #bfbfbf;
@@ -53,5 +52,17 @@ a:hover {
 }
 
 .orangeColor{
+  color: #ff6600;
+}
+.graph-container{
+  padding: 10px 0 5px 0;
+}
+.graphRadioBtns{
+  background-color: black;
+  padding: 15px 10px 15px 10px;
+}
+.radioContainer{
+  display: inline-block;
+  padding: 0 5px 0 5px;
   color: #ff6600;
 }

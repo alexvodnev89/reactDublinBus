@@ -11,17 +11,17 @@ export class RealTime extends React.Component {
     this.state = {};
   }
 
-
   componentWillMount(){
     this.getBusDetails();
   }
 
+
   updateBusResults(){
-    this.getBusDetails();
+    this.getBusDetails(this.refs.userStopInput.value);
   }
 
-  getBusDetails(query = "1712"){
-    var url='https://data.dublinked.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${query}&format=json';
+  getBusDetails(userStopInput = "1712"){
+    var url=`https://data.dublinked.ie/cgi-bin/rtpi/realtimebusinformation?stopid=${userStopInput}&format=json`;
     Request.get(url).then((response) => {
       this.setState({
         dbResults: response.body.results
@@ -32,14 +32,14 @@ export class RealTime extends React.Component {
 
   render(){
     var busResults = _.map(this.state.dbResults, (result) => {
-      return <li>{"Bus No : " + result.route + " Full expected time : " + result.arrivaldatetime + " DUE in " + result.duetime + " min"}</li>;
+      return <li key={result.arrivaldatetime}>{"Bus No : " + result.route + " Full expected time : " + result.arrivaldatetime + " DUE in " + result.duetime + " min"}</li>;
     });
 
     return(
       <div className="orangeColor">
         <h3>Real time Page</h3>
           <div>
-            <input ref="query" type="text" onChange={() => {this.updateBusResults();}}/>
+            <input ref="userStopInput" type="text" onChange={(e) => {this.updateBusResults();}}/>
           </div>
             <div>
               <ul className="apiUl">{busResults}</ul>
