@@ -12,16 +12,14 @@ export class RealTime extends React.Component {
       busStop: "1712"
     };
   }
-  clicked(){
+
+  onApiButtonClick(){
     this.setState({
       busStop: this.refs.inputBox.value
     });
-    this.onApiButtonClick();
-  }
 
-  onApiButtonClick(){
-    // only called at the very start when component is added to the page.
-    console.log(this.state.busStop);
+  }
+  componentWillUpdate(){
     var url="https://data.dublinked.ie/cgi-bin/rtpi/realtimebusinformation?stopid="+this.state.busStop+"&format=json";
     Request.get(url).then((response) => {
       this.setState({
@@ -40,7 +38,7 @@ export class RealTime extends React.Component {
         <h3>Real time Page</h3>
           <div>
             <input ref="inputBox" type="text"/>
-            <button id="apiCallButton" onClick={(e) => {this.clicked();}}>Button</button>
+            <button id="apiCallButton" onClick={() => {this.onApiButtonClick();}}>Button</button>
           </div>
             <div>
               <ul className="apiUl">{busResults}</ul>
