@@ -1,6 +1,7 @@
 import React from "react";
 import highcharts from "highcharts";
 import ReactHighcharts from "react-highcharts";
+import Request from "superagent";
 
 import { browserHistory } from "react-router";
 
@@ -16,12 +17,19 @@ export class Chart extends React.Component {
       type: "line",
       info: props.route.info
     };
-  }
+  };
   radioSelect(e){
     this.setState({
       type: e.target.value
     })
-  }
+  };
+  clickTest(){
+    console.log("test");
+    var url="http://localhost:8888/";
+    Request.get(url).then((response) => {
+      console.log(response);
+    });
+  };
 
   render() {
       var config = {
@@ -74,7 +82,11 @@ export class Chart extends React.Component {
             </div>
           </div>
           <ReactHighcharts config={config}></ReactHighcharts>
+          <div>
+            <button onClick={this.clickTest.bind(this)}>Test</button>
+          </div>
         </div>
+
       )
     }
 }

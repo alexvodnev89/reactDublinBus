@@ -7,9 +7,12 @@ import { Root } from "./components/Root";
 import { Home } from "./components/Home";
 import { User } from "./components/User";
 import { RealTime } from "./components/RealTime";
-import { Chart } from "./components/Chart"
+import { Chart } from "./components/Chart";
+import Request from "superagent";
+import io from 'socket.io-client';''
 
 class App extends React.Component {
+
   constructor(){
     super();
     this.state = {
@@ -21,14 +24,20 @@ class App extends React.Component {
               "1479","315","404","747","843","845","846","7340"],
       average: [5,3,5,8,2,1,7,4,1,0,4,6,3,12,2,4,6,3,7,2,2,5,4,6,7,2,1,3,5,0,
                 3,2,4,5,7,1,9,3,6,2,4,1,2,4,3,2,6,4,9,1,4,6,5,3,4,5,6,1],
-      timeZone: [3,4,1,6,8,2,4,5,6,4,7,9,3,2,4,6,0,0,6,3,5,7,5,3,5,6,7,8,3,2,
-                4,5,3,6,8,3,1,2,3,6,3,1,8,4,5,9,5,3,4,2,1,4,6,0,8,0,4,6],
+      timeZone: [0.43,0.32,0.2,6,8,2,4,5,6,4,7,9,3,2,4,6,0,0,6,3,5,7,5,3,5,6,7,8,3,2,
+                4,5,3,6,8,3,1,2,3,6,3,1,8,4,5,9,5,3,4,2,1,4,6,0,8,-0.45,-4,-10],
       timeZoneString: "This week",
       from: "Blanchardstown",
       to: "Baggot street",
       routeNumber: "1712"
     };
+  
+
   }
+
+
+
+
   render() {
     return (
       <Router history={browserHistory}>
