@@ -4,6 +4,7 @@ import ReactHighcharts from "react-highcharts";
 import Request from "superagent";
 
 import { browserHistory } from "react-router";
+import { Spinner } from "./Spinner";
 
 export class Chart extends React.Component {
 
@@ -15,7 +16,8 @@ export class Chart extends React.Component {
       timeGiven: props.route.time,
       timeName: props.route.timeName,
       type: "line",
-      info: props.route.info
+      info: props.route.info,
+      gettingData: false
     };
   };
   radioSelect(e){
@@ -24,12 +26,29 @@ export class Chart extends React.Component {
     })
   };
   clickTest(){
-    console.log("test");
-    var url="http://localhost:8888/";
-    Request.get(url).then((response) => {
-      console.log(response);
+    this.setState({
+      gettingData: true
     });
+
+    var url="http://localhost:8888?param=averageday";
+    Request.get(url).then((response) => {
+      //console.log(response);
+      var myObject = JSON.parse(response.text);
+      this.setState({
+        average: myObject.valuesAverage,
+        timeGiven: myObject.valuesDay,
+        gettingData: false
+      });
+    },(response) => {
+      this.setState({
+        gettingData: false
+      });
+    }
+
+
+    );
   };
+
 
   render() {
       var config = {
@@ -62,7 +81,8 @@ export class Chart extends React.Component {
       }
       return (
         <div className="graph-container">
-          <div className="graphRadioBtns">
+          {this.state.gettingData ? (<h1></h1>) :
+          (<div className="graphRadioBtns">
             <div onChange={this.radioSelect.bind(this)}>
               <div className="radioContainer">
                 <input type="radio" value="column" name="chartRadio"/> Column
@@ -80,11 +100,14 @@ export class Chart extends React.Component {
                 <input type="radio" value="areaspline" name="chartRadio"/> Areaspline
               </div>
             </div>
-          </div>
-          <ReactHighcharts config={config}></ReactHighcharts>
-          <div>
-            <button onClick={this.clickTest.bind(this)}>Test</button>
-          </div>
+          </div>)}
+          {this.state.gettingData ?
+            (<Spinner/>) : (<ReactHighcharts config={config}></ReactHighcharts>)}
+          {this.state.gettingData ? (<h1></h1>) :
+          (<div className="statsButtons">
+            <button className="statButton" onClick={this.clickTest.bind(this)}>Today / Average Stats</button>
+            <button className="statButton" onClick={this.clickTest.bind(this)}>This week / Average Stats</button>
+          </div>)}
         </div>
 
       )
